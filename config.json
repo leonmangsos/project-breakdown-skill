@@ -1,0 +1,152 @@
+{
+  "skillVersion": "1.0.0",
+  "autoSave": true,
+  "autoArchive": true,
+  "archiveAfterDays": 30,
+  "defaultPriority": "medium",
+  "enableChangeLog": true,
+  "maxChangeLogEntries": 500,
+  "maxTaskHistory": 100,
+  "backupOnSave": true,
+  "backupRetentionDays": 7,
+  "projectDirectory": ".workbuddy/project-breakdown",
+  "maxActiveProjects": 1,
+  "enableAutoIntervention": true,
+  "interventionConfidence": 0.8,
+  "triggerKeywords": {
+    "newProject": [
+      "创建",
+      "开发",
+      "新建",
+      "开始",
+      "搭建",
+      "构建",
+      "实现",
+      "制作",
+      "做一个",
+      "我要做",
+      "我想做",
+      "帮我做"
+    ],
+    "queryStatus": [
+      "进度",
+      "状态",
+      "任务",
+      "完成",
+      "进展",
+      "情况",
+      "怎么样",
+      "如何",
+      "下一步"
+    ],
+    "modifyRequest": [
+      "修改",
+      "增加",
+      "调整",
+      "删除",
+      "更新",
+      "改变",
+      "优化",
+      "改进",
+      "扩展"
+    ],
+    "reviewProject": [
+      "之前",
+      "刚才",
+      "回顾",
+      "查看",
+      "需求",
+      "项目"
+    ],
+    "continueProject": [
+      "继续",
+      "接下来",
+      "然后",
+      "下一步",
+      "接着"
+    ]
+  },
+  "projectContextAnalysis": {
+    "minContextTokens": 100,
+    "maxContextTokens": 2000,
+    "contextExpiry": 86400
+  },
+  "taskPriorities": {
+    "critical": {
+      "weight": 5,
+      "color": "#dc3545",
+      "description": "阻塞性任务，必须立即处理"
+    },
+    "high": {
+      "weight": 4,
+      "color": "#fd7e14",
+      "description": "高优先级任务，优先处理"
+    },
+    "medium": {
+      "weight": 3,
+      "color": "#ffc107",
+      "description": "中等优先级，按计划执行"
+    },
+    "low": {
+      "weight": 2,
+      "color": "#28a745",
+      "description": "低优先级，有时间再处理"
+    }
+  },
+  "taskCategories": {
+    "setup": {
+      "displayName": "基础设施",
+      "icon": "🔧",
+      "defaultPriority": "critical"
+    },
+    "core-feature": {
+      "displayName": "核心功能",
+      "icon": "⭐",
+      "defaultPriority": "high"
+    },
+    "enhancement": {
+      "displayName": "功能增强",
+      "icon": "✨",
+      "defaultPriority": "medium"
+    },
+    "bugfix": {
+      "displayName": "Bug修复",
+      "icon": "🐛",
+      "defaultPriority": "high"
+    },
+    "testing": {
+      "displayName": "测试",
+      "icon": "🧪",
+      "defaultPriority": "high"
+    },
+    "docs": {
+      "displayName": "文档",
+      "icon": "📚",
+      "defaultPriority": "low"
+    },
+    "deployment": {
+      "displayName": "部署",
+      "icon": "🚀",
+      "defaultPriority": "medium"
+    }
+  },
+  "taskStatusFlow": [
+    "pending",
+    "in-progress",
+    "completed",
+    "blocked"
+  ],
+  "performance": {
+    "enableCaching": true,
+    "cacheExpiry": 3600,
+    "lazyLoading": true,
+    "batchUpdates": true,
+    "compressLogs": true
+  },
+  "integration": {
+    "enableGitIntegration": false,
+    "enableCIIntegration": false,
+    "enableExternalTools": false,
+    "supportedExternalTools": []
+  }
+}
