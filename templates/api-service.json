@@ -1,0 +1,346 @@
+{
+  "name": "API Service Template",
+  "description": "RESTful API服务项目任务模板",
+  "projectType": "api-service",
+  "defaultTechStack": ["nodejs", "express", "typescript"],
+  "taskCategories": {
+    "setup": {
+      "description": "API服务初始化和基础设施",
+      "defaultPriority": "critical"
+    },
+    "core": {
+      "description": "核心API功能开发",
+      "defaultPriority": "high"
+    },
+    "security": {
+      "description": "安全和认证相关",
+      "defaultPriority": "critical"
+    },
+    "data": {
+      "description": "数据库和数据模型",
+      "defaultPriority": "high"
+    },
+    "testing": {
+      "description": "API测试",
+      "defaultPriority": "high"
+    },
+    "deployment": {
+      "description": "部署和监控",
+      "defaultPriority": "medium"
+    },
+    "docs": {
+      "description": "API文档",
+      "defaultPriority": "medium"
+    }
+  },
+  "taskTemplates": [
+    {
+      "templateId": "setup-001",
+      "category": "setup",
+      "title": "API服务初始化",
+      "description": "创建API服务基础结构和配置",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "项目结构完整",
+        "Express/Koa/Fastify框架配置完成",
+        "TypeScript配置完成",
+        "开发环境可以正常启动"
+      ],
+      "dependencies": []
+    },
+    {
+      "templateId": "setup-002",
+      "category": "setup",
+      "title": "环境配置管理",
+      "description": "配置多环境管理和环境变量",
+      "estimatedEffort": "1h",
+      "acceptanceCriteria": [
+        "环境变量配置文件就绪（.env）",
+        "环境切换逻辑完成",
+        "配置验证机制完成"
+      ],
+      "dependencies": ["setup-001"]
+    },
+    {
+      "templateId": "core-001",
+      "category": "core",
+      "title": "API路由架构设计",
+      "description": "设计并实现清晰的API路由结构",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "RESTful路由结构清晰",
+        "路由模块化设计",
+        "统一的路由前缀和命名规范",
+        "版本控制支持（如/api/v1/）"
+      ],
+      "dependencies": ["setup-001"]
+    },
+    {
+      "templateId": "core-002",
+      "category": "core",
+      "title": "请求处理中间件",
+      "description": "实现通用请求处理中间件",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "请求体解析（JSON/URL-encoded）",
+        "日志记录中间件",
+        "CORS配置",
+        "请求ID生成"
+      ],
+      "dependencies": ["core-001"]
+    },
+    {
+      "templateId": "core-003",
+      "category": "core",
+      "title": "统一响应格式",
+      "description": "定义和实现统一的API响应格式",
+      "estimatedEffort": "1.5h",
+      "acceptanceCriteria": [
+        "成功响应格式统一",
+        "错误响应格式统一",
+        "分页响应格式定义",
+        "响应包装器实现"
+      ],
+      "dependencies": ["core-001"]
+    },
+    {
+      "templateId": "core-004",
+      "category": "core",
+      "title": "错误处理机制",
+      "description": "实现统一的错误处理和异常捕获",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "全局错误处理中间件",
+        "自定义错误类型定义",
+        "错误日志记录",
+        "友好的错误响应"
+      ],
+      "dependencies": ["core-002", "core-003"]
+    },
+    {
+      "templateId": "security-001",
+      "category": "security",
+      "title": "身份认证系统",
+      "description": "实现用户身份认证机制（JWT/Session）",
+      "estimatedEffort": "3h",
+      "acceptanceCriteria": [
+        "JWT生成和验证",
+        "Token刷新机制",
+        "Token过期处理",
+        "登录接口实现"
+      ],
+      "dependencies": ["core-003"]
+    },
+    {
+      "templateId": "security-002",
+      "category": "security",
+      "title": "权限控制系统",
+      "description": "实现基于角色的权限控制（RBAC）",
+      "estimatedEffort": "3h",
+      "acceptanceCriteria": [
+        "角色定义和配置",
+        "权限检查中间件",
+        "路由级别权限控制",
+        "权限继承机制"
+      ],
+      "dependencies": ["security-001"]
+    },
+    {
+      "templateId": "security-003",
+      "category": "security",
+      "title": "安全防护措施",
+      "description": "实现常见安全防护（Rate Limiting, Sanitization等）",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "请求频率限制（Rate Limiting）",
+        "输入参数验证和清洗",
+        "SQL注入防护",
+        "XSS防护",
+        "CSRF防护"
+      ],
+      "dependencies": ["security-001"]
+    },
+    {
+      "templateId": "data-001",
+      "category": "data",
+      "title": "数据库连接与配置",
+      "description": "配置数据库连接和ORM",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "数据库连接池配置",
+        "ORM配置（Sequelize/TypeORM/Prisma）",
+        "连接管理（重连、健康检查）",
+        "多环境数据库配置"
+      ],
+      "dependencies": ["setup-002"]
+    },
+    {
+      "templateId": "data-002",
+      "category": "data",
+      "title": "数据模型设计",
+      "description": "设计数据库表结构和模型",
+      "estimatedEffort": "4h",
+      "acceptanceCriteria": [
+        "数据模型定义完整",
+        "表关系正确（一对一、一对多、多对多）",
+        "索引优化",
+        "数据迁移脚本"
+      ],
+      "dependencies": ["data-001"]
+    },
+    {
+      "templateId": "data-003",
+      "category": "data",
+      "title": "数据访问层（DAO）",
+      "description": "实现数据访问层抽象",
+      "estimatedEffort": "3h",
+      "acceptanceCriteria": [
+        "数据访问接口定义",
+        "CRUD操作封装",
+        "复杂查询实现",
+        "事务管理"
+      ],
+      "dependencies": ["data-002"]
+    },
+    {
+      "templateId": "testing-001",
+      "category": "testing",
+      "title": "API测试环境搭建",
+      "description": "配置API测试框架和工具",
+      "estimatedEffort": "1.5h",
+      "acceptanceCriteria": [
+        "测试框架配置（Jest/Mocha）",
+        "测试数据库配置",
+        "测试数据Mock工具",
+        "覆盖率报告工具"
+      ],
+      "dependencies": ["setup-001"]
+    },
+    {
+      "templateId": "testing-002",
+      "category": "testing",
+      "title": "API接口单元测试",
+      "description": "编写API端点的单元测试",
+      "estimatedEffort": "4h",
+      "acceptanceCriteria": [
+        "主要API端点有测试覆盖",
+        "测试用例覆盖正常和异常场景",
+        "Mock数据和依赖",
+        "测试覆盖率 > 80%"
+      ],
+      "dependencies": ["testing-001", "core-004"]
+    },
+    {
+      "templateId": "testing-003",
+      "category": "testing",
+      "title": "API集成测试",
+      "description": "编写API集成测试",
+      "estimatedEffort": "3h",
+      "acceptanceCriteria": [
+        "API完整流程测试",
+        "数据库集成测试",
+        "外部服务集成Mock",
+        "性能基准测试"
+      ],
+      "dependencies": ["testing-002", "data-003"]
+    },
+    {
+      "templateId": "docs-001",
+      "category": "docs",
+      "title": "API文档生成",
+      "description": "配置Swagger/OpenAPI文档",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "Swagger UI可访问",
+        "API端点文档完整",
+        "请求/响应示例",
+        "认证说明"
+      ],
+      "dependencies": ["core-001"]
+    },
+    {
+      "templateId": "docs-002",
+      "category": "docs",
+      "title": "API使用指南",
+      "description": "编写API使用文档和示例",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "快速开始指南",
+        "接口调用示例",
+        "错误码说明",
+        "最佳实践建议"
+      ],
+      "dependencies": ["docs-001"]
+    },
+    {
+      "templateId": "deploy-001",
+      "category": "deployment",
+      "title": "Docker容器化",
+      "description": "编写Dockerfile和docker-compose配置",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "Dockerfile优化",
+        "docker-compose配置",
+        "多阶段构建",
+        "容器镜像体积优化"
+      ],
+      "dependencies": []
+    },
+    {
+      "templateId": "deploy-002",
+      "category": "deployment",
+      "title": "CI/CD配置",
+      "description": "配置持续集成和部署流程",
+      "estimatedEffort": "3h",
+      "acceptanceCriteria": [
+        "GitHub Actions/GitLab CI配置",
+        "自动化测试集成",
+        "自动化构建和部署",
+        "环境变量安全管理"
+      ],
+      "dependencies": ["deploy-001", "testing-003"]
+    },
+    {
+      "templateId": "deploy-003",
+      "category": "deployment",
+      "title": "监控和日志",
+      "description": "配置应用监控和日志收集",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "应用性能监控（APM）",
+        "错误追踪（Sentry等）",
+        "结构化日志",
+        "日志聚合和查询"
+      ],
+      "dependencies": ["deploy-002"]
+    },
+    {
+      "templateId": "enhance-001",
+      "category": "enhancement",
+      "title": "缓存机制",
+      "description": "实现缓存层（Redis）",
+      "estimatedEffort": "3h",
+      "acceptanceCriteria": [
+        "缓存配置和管理",
+        "缓存策略设计",
+        "缓存失效机制",
+        "缓存命中率优化"
+      ],
+      "dependencies": ["data-003"]
+    },
+    {
+      "templateId": "enhance-002",
+      "category": "enhancement",
+      "title": "异步任务处理",
+      "description": "实现异步任务队列（Bull/Agenda）",
+      "estimatedEffort": "3h",
+      "acceptanceCriteria": [
+        "任务队列配置",
+        "任务生产者/消费者",
+        "任务重试机制",
+        "任务监控"
+      ],
+      "dependencies": ["setup-001"]
+    }
+  ]
+}
