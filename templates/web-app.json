@@ -1,0 +1,268 @@
+{
+  "name": "Web Application Template",
+  "description": "标准Web应用项目任务模板",
+  "projectType": "web-app",
+  "defaultTechStack": ["react", "nodejs", "typescript"],
+  "taskCategories": {
+    "setup": {
+      "description": "项目初始化和基础设施搭建",
+      "defaultPriority": "critical"
+    },
+    "core-feature": {
+      "description": "核心业务功能开发",
+      "defaultPriority": "high"
+    },
+    "enhancement": {
+      "description": "功能增强和优化",
+      "defaultPriority": "medium"
+    },
+    "testing": {
+      "description": "测试相关任务",
+      "defaultPriority": "high"
+    },
+    "deployment": {
+      "description": "部署和运维相关",
+      "defaultPriority": "medium"
+    },
+    "docs": {
+      "description": "文档和说明",
+      "defaultPriority": "low"
+    }
+  },
+  "taskTemplates": [
+    {
+      "templateId": "setup-001",
+      "category": "setup",
+      "title": "项目结构初始化",
+      "description": "创建项目基础结构，配置开发环境",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "项目目录结构完整",
+        "包管理器配置完成",
+        "基础配置文件就绪（package.json, tsconfig等）",
+        "开发环境可以正常启动"
+      ],
+      "dependencies": []
+    },
+    {
+      "templateId": "setup-002",
+      "category": "setup",
+      "title": "构建工具配置",
+      "description": "配置构建、打包、热更新等开发工具",
+      "estimatedEffort": "1.5h",
+      "acceptanceCriteria": [
+        "构建工具正常工作",
+        "热更新功能正常",
+        "生产环境打包配置完成"
+      ],
+      "dependencies": ["setup-001"]
+    },
+    {
+      "templateId": "setup-003",
+      "category": "setup",
+      "title": "代码规范和Linting配置",
+      "description": "配置代码风格检查和格式化工具",
+      "estimatedEffort": "1h",
+      "acceptanceCriteria": [
+        "ESLint配置完成",
+        "Prettier配置完成",
+        "Git hooks配置完成"
+      ],
+      "dependencies": ["setup-001"]
+    },
+    {
+      "templateId": "auth-001",
+      "category": "core-feature",
+      "title": "用户认证系统",
+      "description": "实现用户注册、登录、登出功能",
+      "estimatedEffort": "4h",
+      "acceptanceCriteria": [
+        "用户可以注册新账号",
+        "用户可以使用邮箱/密码登录",
+        "登录状态正确维护（JWT/Session）",
+        "退出登录功能正常",
+        "密码正确加密存储"
+      ],
+      "dependencies": ["setup-001"]
+    },
+    {
+      "templateId": "auth-002",
+      "category": "core-feature",
+      "title": "权限管理系统",
+      "description": "实现基于角色的权限控制",
+      "estimatedEffort": "3h",
+      "acceptanceCriteria": [
+        "角色定义清晰（管理员、普通用户等）",
+        "权限检查中间件正常工作",
+        "前端路由权限控制正确",
+        "API接口权限验证正常"
+      ],
+      "dependencies": ["auth-001"]
+    },
+    {
+      "templateId": "api-001",
+      "category": "core-feature",
+      "title": "后端API基础架构",
+      "description": "搭建RESTful API框架和基础中间件",
+      "estimatedEffort": "3h",
+      "acceptanceCriteria": [
+        "API路由结构清晰",
+        "统一错误处理机制",
+        "请求日志记录",
+        "API文档生成（Swagger/OpenAPI）"
+      ],
+      "dependencies": ["setup-001", "auth-001"]
+    },
+    {
+      "templateId": "frontend-001",
+      "category": "core-feature",
+      "title": "前端路由配置",
+      "description": "配置前端路由和页面结构",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "路由配置完整",
+        "页面组件结构清晰",
+        "路由守卫正常工作",
+        "404页面处理"
+      ],
+      "dependencies": ["setup-002"]
+    },
+    {
+      "templateId": "frontend-002",
+      "category": "core-feature",
+      "title": "状态管理实现",
+      "description": "实现全局状态管理（Redux/Zustand等）",
+      "estimatedEffort": "3h",
+      "acceptanceCriteria": [
+        "状态管理框架配置完成",
+        "状态更新逻辑清晰",
+        "状态持久化（如需要）",
+        "性能优化（避免不必要的渲染）"
+      ],
+      "dependencies": ["frontend-001"]
+    },
+    {
+      "templateId": "data-001",
+      "category": "core-feature",
+      "title": "数据库设计与实现",
+      "description": "设计数据库表结构和ORM配置",
+      "estimatedEffort": "4h",
+      "acceptanceCriteria": [
+        "数据库表设计合理",
+        "ORM配置完成",
+        "数据迁移脚本就绪",
+        "数据库索引优化"
+      ],
+      "dependencies": ["setup-001"]
+    },
+    {
+      "templateId": "ui-001",
+      "category": "core-feature",
+      "title": "UI组件库集成",
+      "description": "集成UI组件库并封装常用组件",
+      "estimatedEffort": "3h",
+      "acceptanceCriteria": [
+        "UI库正确配置",
+        "主题定制完成",
+        "常用组件封装（Button, Input, Modal等）",
+        "响应式设计适配"
+      ],
+      "dependencies": ["setup-002"]
+    },
+    {
+      "templateId": "test-001",
+      "category": "testing",
+      "title": "单元测试环境搭建",
+      "description": "配置单元测试框架和工具",
+      "estimatedEffort": "1.5h",
+      "acceptanceCriteria": [
+        "测试框架配置完成（Jest/Vitest等）",
+        "测试覆盖率工具配置",
+        "示例测试用例可以运行"
+      ],
+      "dependencies": ["setup-001"]
+    },
+    {
+      "templateId": "test-002",
+      "category": "testing",
+      "title": "API集成测试",
+      "description": "编写API接口的集成测试",
+      "estimatedEffort": "3h",
+      "acceptanceCriteria": [
+        "主要API端点有测试覆盖",
+        "测试数据Mock完成",
+        "测试可以自动化运行"
+      ],
+      "dependencies": ["api-001", "test-001"]
+    },
+    {
+      "templateId": "test-003",
+      "category": "testing",
+      "title": "E2E测试",
+      "description": "编写端到端测试用例",
+      "estimatedEffort": "4h",
+      "acceptanceCriteria": [
+        "E2E测试框架配置（Cypress/Playwright）",
+        "核心用户流程有测试覆盖",
+        "测试可以在CI环境运行"
+      ],
+      "dependencies": ["test-001"]
+    },
+    {
+      "templateId": "perf-001",
+      "category": "enhancement",
+      "title": "性能优化",
+      "description": "优化应用性能（代码分割、懒加载等）",
+      "estimatedEffort": "3h",
+      "acceptanceCriteria": [
+        "首屏加载时间 < 3秒",
+        "代码分割完成",
+        "图片资源优化",
+        "缓存策略合理"
+      ],
+      "dependencies": ["frontend-002", "data-001"]
+    },
+    {
+      "templateId": "deploy-001",
+      "category": "deployment",
+      "title": "CI/CD配置",
+      "description": "配置持续集成和部署流程",
+      "estimatedEffort": "3h",
+      "acceptanceCriteria": [
+        "CI流程配置完成",
+        "自动化测试集成",
+        "部署流程自动化",
+        "环境变量管理完善"
+      ],
+      "dependencies": ["test-003"]
+    },
+    {
+      "templateId": "deploy-002",
+      "category": "deployment",
+      "title": "生产环境部署",
+      "description": "部署应用到生产环境",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "应用可以正常访问",
+        "HTTPS配置完成",
+        "域名解析正确",
+        "监控和日志就绪"
+      ],
+      "dependencies": ["deploy-001"]
+    },
+    {
+      "templateId": "docs-001",
+      "category": "docs",
+      "title": "项目文档编写",
+      "description": "编写项目README和开发文档",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "README文档完整",
+        "安装说明清晰",
+        "开发指南详细",
+        "API文档完整"
+      ],
+      "dependencies": ["deploy-002"]
+    }
+  ]
+}
