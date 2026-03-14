@@ -1,0 +1,374 @@
+{
+  "name": "CLI Tool Template",
+  "description": "命令行工具项目任务模板",
+  "projectType": "cli-tool",
+  "defaultTechStack": ["nodejs", "typescript", "commander"],
+  "taskCategories": {
+    "setup": {
+      "description": "CLI工具初始化和基础配置",
+      "defaultPriority": "critical"
+    },
+    "core": {
+      "description": "核心命令和功能实现",
+      "defaultPriority": "high"
+    },
+    "ux": {
+      "description": "用户体验和交互优化",
+      "defaultPriority": "medium"
+    },
+    "config": {
+      "description": "配置管理和持久化",
+      "defaultPriority": "medium"
+    },
+    "testing": {
+      "description": "CLI工具测试",
+      "defaultPriority": "high"
+    },
+    "distribution": {
+      "description": "打包和发布",
+      "defaultPriority": "medium"
+    },
+    "docs": {
+      "description": "文档和帮助信息",
+      "defaultPriority": "medium"
+    }
+  },
+  "taskTemplates": [
+    {
+      "templateId": "setup-001",
+      "category": "setup",
+      "title": "CLI工具初始化",
+      "description": "创建CLI工具基础结构",
+      "estimatedEffort": "1.5h",
+      "acceptanceCriteria": [
+        "项目结构完整",
+        "CLI框架配置（Commander/Inquirer等）",
+        "TypeScript配置完成",
+        "可以执行基本命令"
+      ],
+      "dependencies": []
+    },
+    {
+      "templateId": "setup-002",
+      "category": "setup",
+      "title": "构建配置",
+      "description": "配置打包和构建工具",
+      "estimatedEffort": "1.5h",
+      "acceptanceCriteria": [
+        "构建工具配置完成（tsup/rollup）",
+        "支持多种输出格式（CJS/ESM）",
+        "Source map生成",
+        "构建优化配置"
+      ],
+      "dependencies": ["setup-001"]
+    },
+    {
+      "templateId": "core-001",
+      "category": "core",
+      "title": "命令架构设计",
+      "description": "设计CLI命令结构和路由",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "主命令和子命令结构清晰",
+        "命令层级合理",
+        "命名规范统一",
+        "命令分组（如需要）"
+      ],
+      "dependencies": ["setup-001"]
+    },
+    {
+      "templateId": "core-002",
+      "category": "core",
+      "title": "参数解析和验证",
+      "description": "实现命令参数解析和验证",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "选项参数正确解析",
+        "位置参数支持",
+        "参数验证和转换",
+        "默认值处理"
+      ],
+      "dependencies": ["core-001"]
+    },
+    {
+      "templateId": "core-003",
+      "category": "core",
+      "title": "核心业务逻辑实现",
+      "description": "实现CLI的主要功能逻辑",
+      "estimatedEffort": "4h",
+      "acceptanceCriteria": [
+        "核心功能正常工作",
+        "错误处理完善",
+        "边界情况处理",
+        "性能满足要求"
+      ],
+      "dependencies": ["core-002"]
+    },
+    {
+      "templateId": "ux-001",
+      "category": "ux",
+      "title": "交互式命令实现",
+      "description": "实现交互式命令（inquirer/prompts）",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "交互式流程流畅",
+        "选项提示清晰",
+        "默认值合理",
+        "支持键盘导航"
+      ],
+      "dependencies": ["core-001"]
+    },
+    {
+      "templateId": "ux-002",
+      "category": "ux",
+      "title": "输出格式化",
+      "description": "实现友好的输出格式（表格、颜色、进度条等）",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "输出格式多样（table/json/yaml等）",
+        "颜色和样式使用合理",
+        "进度条实现（如需要）",
+        "错误信息友好"
+      ],
+      "dependencies": ["core-003"]
+    },
+    {
+      "templateId": "ux-003",
+      "category": "ux",
+      "title": "帮助和提示信息",
+      "description": "完善的帮助文档和提示信息",
+      "estimatedEffort": "1.5h",
+      "acceptanceCriteria": [
+        "全局帮助信息完整",
+        "命令级帮助详细",
+        "使用示例清晰",
+        "错误提示有帮助"
+      ],
+      "dependencies": ["core-001"]
+    },
+    {
+      "templateId": "config-001",
+      "category": "config",
+      "title": "配置文件管理",
+      "description": "实现配置文件读取和写入",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "支持配置文件（.rc文件）",
+        "配置格式选择（JSON/YAML/JS）",
+        "配置优先级正确",
+        "配置验证机制"
+      ],
+      "dependencies": ["setup-001"]
+    },
+    {
+      "templateId": "config-002",
+      "category": "config",
+      "title": "环境变量集成",
+      "description": "集成环境变量配置",
+      "estimatedEffort": "1h",
+      "acceptanceCriteria": [
+        "环境变量正确读取",
+        "配置覆盖优先级",
+        "环境变量验证",
+        "敏感信息处理"
+      ],
+      "dependencies": ["config-001"]
+    },
+    {
+      "templateId": "config-003",
+      "category": "config",
+      "title": "配置持久化",
+      "description": "实现用户配置的持久化存储",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "用户配置路径正确",
+        "配置自动创建",
+        "配置更新机制",
+        "配置清理功能"
+      ],
+      "dependencies": ["config-001"]
+    },
+    {
+      "templateId": "testing-001",
+      "category": "testing",
+      "title": "测试环境搭建",
+      "description": "配置CLI工具测试环境",
+      "estimatedEffort": "1.5h",
+      "acceptanceCriteria": [
+        "测试框架配置（Jest/Vitest）",
+        "测试辅助工具（execa等）",
+        "测试数据Mock",
+        "覆盖率报告"
+      ],
+      "dependencies": ["setup-001"]
+    },
+    {
+      "templateId": "testing-002",
+      "category": "testing",
+      "title": "命令测试",
+      "description": "编写CLI命令的测试用例",
+      "estimatedEffort": "3h",
+      "acceptanceCriteria": [
+        "主要命令有测试覆盖",
+        "参数验证测试",
+        "输出结果测试",
+        "错误处理测试"
+      ],
+      "dependencies": ["testing-001", "core-003"]
+    },
+    {
+      "templateId": "testing-003",
+      "category": "testing",
+      "title": "集成测试",
+      "description": "编写CLI工具集成测试",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "完整流程测试",
+        "多命令组合测试",
+        "配置集成测试",
+        "端到端测试"
+      ],
+      "dependencies": ["testing-002", "config-003"]
+    },
+    {
+      "templateId": "distribution-001",
+      "category": "distribution",
+      "title": "npm包配置",
+      "description": "配置npm包发布",
+      "estimatedEffort": "1.5h",
+      "acceptanceCriteria": [
+        "package.json配置完整",
+        "bin字段正确设置",
+        "files字段配置",
+        "发布脚本就绪"
+      ],
+      "dependencies": ["setup-002"]
+    },
+    {
+      "templateId": "distribution-002",
+      "category": "distribution",
+      "title": "多平台支持",
+      "description": "确保跨平台兼容性（Windows/Linux/macOS）",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "路径处理跨平台",
+        "Shell命令兼容",
+        "换行符处理",
+        "权限处理"
+      ],
+      "dependencies": ["setup-001"]
+    },
+    {
+      "templateId": "distribution-003",
+      "category": "distribution",
+      "title": "版本管理和发布流程",
+      "description": "配置自动化版本管理和发布",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "版本号管理规范",
+        "Changelog自动生成",
+        "发布流程自动化",
+        "Git标签管理"
+      ],
+      "dependencies": ["distribution-001"]
+    },
+    {
+      "templateId": "docs-001",
+      "category": "docs",
+      "title": "README文档",
+      "description": "编写完整的README文档",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "项目介绍清晰",
+        "安装说明详细",
+        "使用示例丰富",
+        "API文档完整"
+      ],
+      "dependencies": ["distribution-001"]
+    },
+    {
+      "templateId": "docs-002",
+      "category": "docs",
+      "title": "贡献指南",
+      "description": "编写CONTRIBUTING指南",
+      "estimatedEffort": "1.5h",
+      "acceptanceCriteria": [
+        "开发环境搭建说明",
+        "代码规范说明",
+        "提交流程说明",
+        "测试运行说明"
+      ],
+      "dependencies": ["testing-003"]
+    },
+    {
+      "templateId": "enhance-001",
+      "category": "enhancement",
+      "title": "性能优化",
+      "description": "优化CLI工具性能",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "启动时间优化",
+        "内存使用优化",
+        "大文件处理优化",
+        "并发处理优化"
+      ],
+      "dependencies": ["core-003"]
+    },
+    {
+      "templateId": "enhance-002",
+      "category": "enhancement",
+      "title": "Shell自动补全",
+      "description": "实现命令自动补全功能",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "Bash补全支持",
+        "Zsh补全支持",
+        "Fish补全支持",
+        "PowerShell补全支持"
+      ],
+      "dependencies": ["core-002"]
+    },
+    {
+      "templateId": "enhance-003",
+      "category": "enhancement",
+      "title": "插件系统",
+      "description": "实现插件扩展机制（可选）",
+      "estimatedEffort": "4h",
+      "acceptanceCriteria": [
+        "插件加载机制",
+        "插件钩子定义",
+        "插件API文档",
+        "示例插件"
+      ],
+      "dependencies": ["core-001"]
+    },
+    {
+      "templateId": "enhance-004",
+      "category": "enhancement",
+      "title": "更新检查",
+      "description": "实现版本更新检查",
+      "estimatedEffort": "1.5h",
+      "acceptanceCriteria": [
+        "版本检测机制",
+        "更新提示友好",
+        "可配置更新检查",
+        "静默更新选项"
+      ],
+      "dependencies": ["setup-001"]
+    },
+    {
+      "templateId": "ci-001",
+      "category": "ci",
+      "title": "CI/CD配置",
+      "description": "配置持续集成和测试",
+      "estimatedEffort": "2h",
+      "acceptanceCriteria": [
+        "CI流程配置",
+        "自动化测试",
+        "代码质量检查",
+        "自动化发布"
+      ],
+      "dependencies": ["testing-003", "distribution-003"]
+    }
+  ]
+}
